@@ -35,3 +35,10 @@ config :phoenix, :plug_init_mode, :runtime
 # Enable helpful, but potentially expensive runtime checks
 config :phoenix_live_view,
   enable_expensive_runtime_checks: true
+
+# Configure Wallaby for testing
+config :wallaby,
+  driver: Wallaby.Chrome,
+  chrome: [
+    headless: true
+  ]

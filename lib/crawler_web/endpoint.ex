@@ -11,10 +11,6 @@ defmodule CrawlerWeb.Endpoint do
     same_site: "Lax"
   ]
 
-  socket "/live", Phoenix.LiveView.Socket,
-    websocket: [connect_info: [session: @session_options]],
-    longpoll: [connect_info: [session: @session_options]]
-
   # Serve at "/" the static files from "priv/static" directory.
   #
   # When code reloading is disabled (e.g., in production),
@@ -24,7 +20,7 @@ defmodule CrawlerWeb.Endpoint do
     at: "/",
     from: :crawler,
     gzip: not code_reloading?,
-    only: CrawlerWeb.static_paths()
+    only: ["hologram" | CrawlerWeb.static_paths()]
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -50,5 +46,6 @@ defmodule CrawlerWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  plug Hologram.Router
   plug CrawlerWeb.Router
 end

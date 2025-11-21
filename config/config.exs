@@ -60,6 +60,22 @@ config :logger, :default_formatter,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# Configure Wallaby for browser automation
+config :wallaby,
+  js_errors: false,
+  driver: Wallaby.Chrome,
+  hackney_options: [timeout: 5_000, recv_timeout: :infinity, pool: :wallaby_pool],
+  chrome: [
+    headless: true,
+    args: [
+      "--no-sandbox",
+      "--disable-gpu",
+      "--disable-dev-shm-usage",
+      "--window-size=1280,800",
+      "--fullscreen"
+    ]
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

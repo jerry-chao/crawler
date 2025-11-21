@@ -26,7 +26,6 @@ defmodule CrawlerWeb do
       # Import common connection and controller functions to use in pipelines
       import Plug.Conn
       import Phoenix.Controller
-      import Phoenix.LiveView.Router
     end
   end
 
@@ -48,17 +47,17 @@ defmodule CrawlerWeb do
     end
   end
 
-  def live_view do
+  def hologram_page do
     quote do
-      use Phoenix.LiveView
+      use Hologram.Page
 
       unquote(html_helpers())
     end
   end
 
-  def live_component do
+  def hologram_component do
     quote do
-      use Phoenix.LiveComponent
+      use Hologram.Component
 
       unquote(html_helpers())
     end
@@ -88,7 +87,6 @@ defmodule CrawlerWeb do
       import CrawlerWeb.CoreComponents
 
       # Common modules used in templates
-      alias Phoenix.LiveView.JS
       alias CrawlerWeb.Layouts
 
       # Routes generation with the ~p sigil
@@ -106,7 +104,7 @@ defmodule CrawlerWeb do
   end
 
   @doc """
-  When used, dispatch to the appropriate controller/live_view/etc.
+  When used, dispatch to the appropriate controller/hologram_page/etc.
   """
   defmacro __using__(which) when is_atom(which) do
     apply(__MODULE__, which, [])

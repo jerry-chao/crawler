@@ -35,3 +35,6 @@ crawler-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# Hologram generated JavaScript bundles.
+/priv/static/hologram/
+

@@ -12,8 +12,10 @@ defmodule Crawler.Application do
       Crawler.Repo,
       {DNSCluster, query: Application.get_env(:crawler, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Crawler.PubSub},
-      # Start a worker by calling: Crawler.Worker.start_link(arg)
-      # {Crawler.Worker, arg},
+      # Start crawling system components
+      Crawler.Crawling.Broadway.URLQueue,
+      Crawler.Crawling.Broadway.URLRegistry,
+      Crawler.Crawling.Broadway.Pipeline,
       # Start to serve requests, typically the last entry
       CrawlerWeb.Endpoint
     ]
